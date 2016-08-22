@@ -55,6 +55,8 @@ namespace Transcriptify
         List<ScriptLine> transcriptList = new List<ScriptLine>();
         List<int> searchResultIndices = new List<int>();
         Font defaultFont;
+        private bool searchUpdated = false;
+
         public TranscriptifyForm()
         {
             InitializeComponent();
@@ -120,7 +122,7 @@ namespace Transcriptify
 
                     foreach (ScriptLine scritpLine in transcriptList)
                     {
-                        transcriptText += scritpLine.Text; // + " ";
+                        transcriptText += scritpLine.Text;
                     }
 
                     transcriptText = TextHelper.RemoveLineEndings(transcriptText);
@@ -197,7 +199,7 @@ namespace Transcriptify
 
         private void SelectLineInTranscript()
         {
-            if (transcriptList.Count > 0)
+            if (transcriptList.Count > 0 && trackBarScript.Value < transcriptList.Count)
             {
                 txtTranscriptOut.Text = TextHelper.RemoveLineEndings(transcriptList[trackBarScript.Value].Text);
 
@@ -209,29 +211,51 @@ namespace Transcriptify
                 t.Milliseconds);
 
                 lblTimeCode.Text = timeCode;
+
+
+                txtOutput.Suspend();
+                string txtOutputContents = txtOutput.Text;
+
+                int phraseLength = transcriptList[trackBarScript.Value].Text.Length + 1;
+
+                string txtTempStart = txtOutputContents.Substring(0, transcriptList[trackBarScript.Value].Index);
+
+                int phraseEnd = transcriptList[trackBarScript.Value].Index + phraseLength;
+
+                string txtTempEnd = "";
+                if (txtOutputContents.Length - phraseEnd > 0)
+                {
+                    txtTempEnd = txtOutputContents.Substring(phraseEnd - 1, (txtOutputContents.Length - phraseEnd));
+                }
+
+
+                txtOutput.Text = "";
+
+                RichTextBoxExtensions.AppendText(txtOutput, TextHelper.RemoveLineEndings(txtTempStart), Color.Black);
+                RichTextBoxExtensions.AppendText(txtOutput, TextHelper.RemoveLineEndings(transcriptList[trackBarScript.Value].Text), Color.Red);
+                RichTextBoxExtensions.AppendText(txtOutput, TextHelper.RemoveLineEndings(txtTempEnd), Color.Black);
+
+                if (txtSearch.Text != "")
+                {
+                    int index = 0;
+                    do
+                    {
+                        index = transcriptText.ToLower().IndexOf(txtSearch.Text.ToLower(), index);
+                        if (index != -1)
+                        {
+                            txtOutput.SelectionStart = index;
+                            txtOutput.SelectionLength = txtSearch.Text.Length;
+                            txtOutput.SelectionFont = new Font(txtOutput.Font, FontStyle.Bold);
+                            index++;
+                        }
+                    } while (index != -1);
+                }
+
+                txtOutput.SelectionStart = phraseEnd;
+                txtOutput.ScrollToCaret();
+                SendMessage(txtOutput.Handle, (uint)0x00B6, (UIntPtr)0, (IntPtr)(-10));// Scroll down 10 lines
+                txtOutput.Resume();
             }
-
-            txtOutput.Suspend();
-            string txtOutputContents = transcriptText;
-
-            int phraseLength = transcriptList[trackBarScript.Value].Text.Length + 1;
-
-            string txtTempStart = txtOutputContents.Substring(0, transcriptList[trackBarScript.Value].Index);
-
-            int phraseEnd = transcriptList[trackBarScript.Value].Index + phraseLength;
-
-            string txtTempEnd = txtOutputContents.Substring(phraseEnd - 1, (txtOutputContents.Length - phraseEnd));
-
-            txtOutput.Text = "";
-
-            RichTextBoxExtensions.AppendText(txtOutput, TextHelper.RemoveLineEndings(txtTempStart), Color.Black);
-            RichTextBoxExtensions.AppendText(txtOutput, TextHelper.RemoveLineEndings(transcriptList[trackBarScript.Value].Text), Color.Red);
-            RichTextBoxExtensions.AppendText(txtOutput, TextHelper.RemoveLineEndings(txtTempEnd), Color.Black);
-
-            txtOutput.SelectionStart = phraseEnd;
-            txtOutput.ScrollToCaret();
-            SendMessage(txtOutput.Handle, (uint)0x00B6, (UIntPtr)0, (IntPtr)(-10));// Scroll down 10 lines
-            txtOutput.Resume();
 
         }
 
@@ -298,6 +322,7 @@ namespace Transcriptify
 
         private void btnSeach_Click(object sender, EventArgs e)
         {
+            if(txtSearch.Text != "")
             SearchTranscript();
         }
 
@@ -309,6 +334,7 @@ namespace Transcriptify
             lsbSearchResults.Items.Clear();
             int index = 0;
             int occurences = 0;
+
             do
             {
                 index = transcriptText.ToLower().IndexOf(txtSearch.Text.ToLower(), index);
@@ -322,23 +348,51 @@ namespace Transcriptify
                     index++;
                 }
             } while (index != -1);
-            //MessageBox.Show("" + occurences + " Occurences found!");
+
             lblOccurences.Text = "" + occurences;
             if (occurences > 0)
             {
                 lsbSearchResults.DataSource = searchResultIndices;
+                searchUpdated = true;
             }
         }
 
         private void lsbSearchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lsbSearchResults.DataSource != null)
+            txtOutput.Suspend();
+            if (!searchUpdated)
             {
-                txtOutput.SelectionStart = (int)lsbSearchResults.SelectedItem;
-                txtOutput.SelectionLength = txtSearch.Text.Length;
-                txtOutput.SelectionFont = new Font(txtOutput.Font, FontStyle.Bold);
-                txtOutput.ScrollToCaret();
+                if (lsbSearchResults.DataSource != null)
+                {
+                    txtOutput.SelectionStart = (int)lsbSearchResults.SelectedItem;
+                    txtOutput.SelectionLength = txtSearch.Text.Length;
+                    txtOutput.SelectionFont = new Font(txtOutput.Font, FontStyle.Bold);
+                    txtOutput.ScrollToCaret();
+
+                    ScriptLine foundLine = transcriptList[transcriptList.Count - 1];
+                    int foundLineID = transcriptList.Count - 1;
+
+                    for (int index = 0; index < transcriptList.Count - 1; index++)
+                    {
+                        if (transcriptList[index].Index >= (int)lsbSearchResults.SelectedItem && (int) lsbSearchResults.SelectedItem < transcriptList[index + 1].Index)
+                        {
+                            foundLine = transcriptList[index];
+                            foundLineID = index-1;
+                            break;
+                        }
+                    }
+                    if (foundLineID < trackBarScript.Maximum)
+                    {
+                        trackBarScript.Value = foundLineID;
+                        SelectLineInTranscript();
+                    }
+                }
             }
+            else
+            {
+                searchUpdated = false;
+            }
+            txtOutput.Resume();
         }
 
         private void txtSearch_KeyUp(object sender, KeyEventArgs e)

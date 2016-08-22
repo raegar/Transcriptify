@@ -126,7 +126,7 @@
             this.trackBarScript.Location = new System.Drawing.Point(476, 518);
             this.trackBarScript.Maximum = 0;
             this.trackBarScript.Name = "trackBarScript";
-            this.trackBarScript.Size = new System.Drawing.Size(534, 45);
+            this.trackBarScript.Size = new System.Drawing.Size(558, 45);
             this.trackBarScript.TabIndex = 8;
             this.trackBarScript.Scroll += new System.EventHandler(this.trackBarScript_Scroll);
             // 
@@ -244,7 +244,7 @@
             // 
             // bntNextLine
             // 
-            this.bntNextLine.Location = new System.Drawing.Point(1009, 520);
+            this.bntNextLine.Location = new System.Drawing.Point(1040, 518);
             this.bntNextLine.Name = "bntNextLine";
             this.bntNextLine.Size = new System.Drawing.Size(22, 22);
             this.bntNextLine.TabIndex = 21;

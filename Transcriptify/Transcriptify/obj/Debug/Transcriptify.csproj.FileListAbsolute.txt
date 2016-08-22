@@ -16,3 +16,12 @@ E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\obj\Debug\Transcriptify.cspro
 E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\obj\Debug\Transcriptify.TranscriptifyForm.resources
 E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\obj\Debug\Transcriptify.Properties.Resources.resources
 E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\obj\Debug\Transcriptify.csproj.GenerateResource.Cache
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\bin\Debug\Transcriptify.exe.config
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.exe
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.pdb
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\bin\Debug\Transcriptify.exe
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\bin\Debug\Transcriptify.pdb
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.csprojResolveAssemblyReference.cache
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.TranscriptifyForm.resources
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.Properties.Resources.resources
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.csproj.GenerateResource.Cache
