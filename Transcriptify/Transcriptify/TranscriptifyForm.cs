@@ -270,7 +270,7 @@ namespace Transcriptify
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
-            save.FileName = "DefaultOutputName.txt";
+            save.FileName = "Transcript.txt";
             save.Filter = "Text File | *.txt";
             if (save.ShowDialog() == DialogResult.OK)
             {
