@@ -25,3 +25,7 @@ E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Trans
 E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.TranscriptifyForm.resources
 E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.Properties.Resources.resources
 E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.csproj.GenerateResource.Cache
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\bin\Debug\Transcriptify.exe.manifest
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\bin\Debug\Transcriptify.application
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.exe.manifest
+E:\Users\Jamie\Dropbox\Transcriptify\Transcriptify\Transcriptify\obj\Debug\Transcriptify.application

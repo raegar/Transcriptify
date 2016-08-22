@@ -76,7 +76,6 @@
             this.txtYoutubeURI.Name = "txtYoutubeURI";
             this.txtYoutubeURI.Size = new System.Drawing.Size(272, 20);
             this.txtYoutubeURI.TabIndex = 2;
-            this.txtYoutubeURI.Text = "https://www.youtube.com/watch?v=U_m9zPKle-0";
             this.txtYoutubeURI.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtYoutubeURI_KeyUp);
             // 
             // btnLoad

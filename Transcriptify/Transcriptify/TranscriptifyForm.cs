@@ -413,23 +413,23 @@ namespace Transcriptify
 
         private void ClearCachedSWFFiles()
         {
-            try
-            {
-                var cachefolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-                              "\\Microsoft\\Windows\\INetCache\\IE";
-                var dirinfo = new DirectoryInfo(cachefolder);
-                foreach (var directoryInfo in dirinfo.GetDirectories())
-                {
-                    foreach (var fileInfo in directoryInfo.GetFiles("*.swf"))
-                    {
-                        fileInfo.Delete();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //try
+            //{
+            //    var cachefolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+            //                  "\\Microsoft\\Windows\\INetCache\\IE";
+            //    var dirinfo = new DirectoryInfo(cachefolder);
+            //    foreach (var directoryInfo in dirinfo.GetDirectories())
+            //    {
+            //        foreach (var fileInfo in directoryInfo.GetFiles("*.swf"))
+            //        {
+            //            fileInfo.Delete();
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
 
         private void btnPrevLine_Click(object sender, EventArgs e)
